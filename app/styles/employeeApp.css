@@ -1,0 +1,17 @@
+body {
+    background-color: #EEEEEE;
+}
+
+.main-content {
+    background-color: #FFFFFF;
+    max-width: 960px;
+    padding: 10px;
+}
+
+.notification-panel {
+    padding: 10px;
+}
+
+.notification-panel p {
+    padding: 5px;
+}

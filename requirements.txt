@@ -1,0 +1,52 @@
+Validations:
+1. First name cannot be empty,
+    last name cannot be empty,
+    age cannot be empty.
+
+2. If designation is Consultant,
+        salary should be between 30,000 and 35,000
+
+3. If designation is Snr. Consultant,
+        salary should be between 36,000 and 40,000
+
+4. If designation is Lead,
+        salary should be between 41,000 and 45,000
+
+5. If designation is Asst. Manager 
+        salary between 46,000 and 50,000
+
+6. If designation is Manager
+        salary between 51,000 and 55,000
+
+7. If designation is Snr. Manager
+        salary between 56,000 and above upto 80,000
+
+
+Design an application that will capture the following details:
+    Employee Number,
+    Employee First Name,
+    Employee Last Name,
+    Employee Middle Name,
+    Employee Age,
+    Employee Designation, (drop down with following values...)
+            Snr. Manager, Manager, Asst. Manager, Lead, Snr. Consultant, Consultant.
+    Salary.
+
+
+The UI should have a table at the top which will use half of the screen.
+
+Below the table should be 3 buttons: Total Employees (#), Add, Edit, Delete.
+
+When user clicks the add button in the second half of the screen you should open up a form and capture the above details. On submitting, a new row should be added to the table ont he top with the details.
+
+When the user browses through the table, it should show the current row and when the user clicks edit the details of the row should be captured in the form below and allowed to edit.
+
+The user can change the values and then on submitting the new values should reflect in the table.
+
+On clicking the delete button the row should be deleted from the table.
+
+Use factories and services to get the data which must not be hard coded in the application (models/views/controllers). It has to be retrieved by json objects. The data can come from a text file also and upon changing the data in external location the application should have the changed data.
+
+Use partial views/templates for the view.
+
+Please use routes for add, edit and delete. And the application should be structured (an example would be that a model should not be called from the UI. The controller should be called which populates the model and returns the same.)

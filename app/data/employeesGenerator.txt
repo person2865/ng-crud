@@ -1,0 +1,45 @@
+/*
+    Generated JSON using: 
+        http://beta.json-generator.com/
+ */
+
+[{
+    'repeat:5': {
+
+        id: '{{index(1)}}',
+        name: {
+            first: '{{firstName()}}',
+            middle: '{{firstName()}}',
+            last: '{{surname()}}'
+        },
+
+        age: '{{integer(20, 40)}}',
+
+        salary: '{{integer(30000, 80000)}}',
+
+        designation: function(tags) {
+            var desig = '',
+                salary = parseFloat(this.salary);
+
+            if (salary >= 30000 && salary < 36000) {
+                desig = 'Consultant';
+            } else if (salary >= 36000 && salary < 41000) {
+                desig = 'Snr. Consultant';
+            } else if (salary >= 41000 && salary < 46000) {
+                desig = 'Lead';
+            }  else if (salary >= 46000 && salary < 51000) {
+                desig = 'Asst. Manager';
+            }  else if (salary >= 51000 && salary < 56000) {
+                desig = 'Manager';
+            }  else if (salary >= 56000 && salary <= 80000) {
+                desig = 'Snr. Manager';
+            } else {
+                desig = 'Volunteer';
+            }
+
+            return desig;
+        }
+
+
+    }
+}]

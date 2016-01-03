@@ -1,0 +1,131 @@
+<div>
+
+    <h2 ng-show="employeeFormModel.id < 0">{{messages.headings.addEmployee}}</h2>
+    <h2 ng-hide="employeeFormModel.id < 0">{{messages.headings.editEmployee}}</h2>
+
+    <div class="notification-panel">
+        <p ng-show="employeeForm['first-name'].$dirty && employeeForm['first-name'].$invalid" class="help-inline bg-danger">
+            {{ messages.errors.firstName }}
+        </p>
+        <p ng-show="employeeForm['last-name'].$dirty && employeeForm['last-name'].$invalid" class="help-inline bg-danger">
+            {{ messages.errors.lastName }}
+        </p>
+        <p ng-show="employeeForm.age.$dirty && employeeForm.age.$invalid" class="help-inline bg-danger">
+            {{ messages.errors.age }}
+        </p>
+        <p ng-show="employeeForm.designation.$dirty && employeeForm.designation.$invalid" class="help-inline bg-danger">
+            {{ messages.errors.designation }}
+        </p>
+        <p ng-show="employeeForm.salary.$dirty && employeeForm.salary.$invalid" class="help-inline bg-danger">
+            {{ messages.errors.salary }}
+            <span ng-if="employeeFormModel.designation === 'Consultant'">{{ messages.errors.salaryConsultant }}</span>
+            <span ng-if="employeeFormModel.designation === 'Snr. Consultant'">{{ messages.errors.salarySnrConsultant }}</span>
+            <span ng-if="employeeFormModel.designation === 'Lead'">{{ messages.errors.salaryLead }}</span>
+            <span ng-if="employeeFormModel.designation === 'Asst. Manager'">{{ messages.errors.salaryAsstManager }}</span>
+            <span ng-if="employeeFormModel.designation === 'Manager'">{{ messages.errors.salaryManager }}</span>
+            <span ng-if="employeeFormModel.designation === 'Snr. Manager'">{{ messages.errors.salarySnrManager }}</span>
+        </p>
+    </div>
+
+    <form name="employeeForm" ng-submit="submitEmployee()" novalidate>
+        <div class="row">
+            <div class="form-group col-md-4" ng-class="{'has-error': employeeFormModel['first-name'].$dirty && employeeFormModel['first-name'].$invalid}">
+                <label for="first-name">First Name *</label>
+                <input ng-model="employeeFormModel.name.first"
+                       type="text"
+                       class="form-control"
+                       id="first-name"
+                       name="first-name"
+                       placeholder="First name"
+                       ng-pattern="/^[a-zA-Z ]+$/"
+                       required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="middle-name">Middle Name</label>
+                <input ng-model="employeeFormModel.name.middle"
+                       type="text"
+                       class="form-control"
+                       id="middle-name"
+                       name="middle-name"
+                       placeholder="Middle name (optional)">
+            </div>
+            <div class="form-group col-md-4" ng-class="{'has-error': employeeForm['last-name'].$dirty && employeeForm['last-name'].$invalid}">
+                <label for="last-name">Last Name *</label>
+                <input ng-model="employeeFormModel.name.last"
+                       type="text"
+                       class="form-control"
+                       id="last-name"
+                       name="last-name"
+                       placeholder="Last name"
+                       ng-pattern="/^[a-zA-Z ]+$/"
+                       required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4" ng-class="{'has-error': employeeForm.age.$dirty && employeeForm.age.$invalid}">
+                <label for="age">Age *</label>
+                <input ng-model="employeeFormModel.age"
+                       type="number"
+                       class="form-control"
+                       id="age"
+                       name="age"
+                       placeholder="Age"
+                       ng-min="0"
+                       ng-pattern="/^[0-9]+$/"
+                       required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4" ng-class="{'has-error': employeeForm.designation.$invalid}">
+                <label for="designation">Designation *</label>
+                <select ng-model="employeeFormModel.designation"
+                        ng-options="item as item for item in designations"
+                        class="form-control"
+                        id="designation"
+                        name="designation"
+                        required>
+                </select>
+            </div>
+            <div class="form-group col-md-4" ng-class="{'has-error': employeeForm.salary.$dirty && employeeForm.salary.$invalid}">
+                <label for="salary">Salary *</label>
+                <input ng-model="employeeFormModel.salary"
+                       type="number"
+                       class="form-control"
+                       id="salary"
+                       name="salary"
+                       placeholder="Salary"
+                       ng-min="30000"
+                       ng-max="80000"
+                       ng-pattern="/^[0-9]+$/"
+                       required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button type="submit"
+                        class="btn btn-primary"
+                        ng-disabled="employeeForm.$invalid">
+                    Submit
+                </button>
+                &nbsp;
+
+                <button class="btn btn-default"
+                   type="reset"
+                   alt="Reset Form"
+                   ng-click="resetForm()">
+                    Reset
+                </button>
+
+            </div>
+            <div class="col-md-4 col-md-offset-4 text-right">
+                <a class="btn btn-danger"
+                   href="#"
+                   role="button"
+                   alt="Call add new employee">
+                    Cancel
+                </a>
+            </div>
+        </div>
+
+    </form>
+</div>

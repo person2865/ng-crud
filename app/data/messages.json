@@ -1,0 +1,19 @@
+{
+  "errors": {
+    "firstName": "Please enter valid first name.",
+    "lastName": "Please enter valid last name.",
+    "age": "Please enter valid age.",
+    "salary": "Please enter valid salary.",
+    "designation": "Please enter valid designation. Salary range for a ",
+    "salaryConsultant": "Consultant should be between $30,000 and $35,000",
+    "salarySnrConsultant": "Snr. Consultant should be between $36,000 and $40,000",
+    "salaryLead": "Lead should be between $41,000 and $45,000",
+    "salaryAsstManager": "Asst. Manager should be between $46,000 and $50,000",
+    "salaryManager": "Manager should be between $51,000 and $55,000",
+    "salarySnrManager": "Snr. Manager should be between $56,000 and $80,000"
+  },
+  "headings": {
+    "addEmployee": "Add New Employee",
+    "editEmployee": "Edit Employee"
+  }
+}
