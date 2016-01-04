@@ -24,7 +24,8 @@ angular.module('employeeApp')
         },
 
         addEmployee: function (item, itemList) {
-          item.id = itemList[itemList.length - 1].id + 1;
+          var arrLen = itemList.length;
+          item.id = arrLen > 0 ? itemList[arrLen - 1].id + 1 : 1;
           itemList.push(item);
           return itemList;
         },
@@ -57,8 +58,6 @@ angular.module('employeeApp')
               return false;
             }
           });
-
-          $log.debug('Get employee by id ' + id + ' = ', item);
 
           return item;
         }

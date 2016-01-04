@@ -3,54 +3,24 @@ angular.module('employeeApp')
     '$scope',
     '$log',
     'EmployeeService',
+    'domainData',
 
-    function ($scope, $log, EmployeeService) {
-      $scope.employees = [];
-      $scope.employeeListReceived = false;
-      $scope.designationsReceived = false;
-      $scope.messagesReceived = false;
+    function ($scope, $log, EmployeeService, domainData) {
+      $scope.employeesReceived = false;
 
       $scope.loadDomainData = function () {
-        EmployeeService.fetchMessages()
-          .then(function (data) {
-            if (angular.isDefined(data)) {
-              $scope.messages = data;
-              $scope.messagesReceived = true;
-            } else {
-              throw 'Failed to get messages.';
-            }
-          })
-          .catch(function (error) {
-            $log.debug(error);
-          });
+        $scope.messages = domainData.messages;
+        $log.debug('$scope.messages = ', $scope.messages);
 
-        EmployeeService.fetchDesignations()
-          .then(function (data) {
-            if (angular.isArray(data) && data.length > 0) {
-              $scope.designations = data;
-              $scope.designationsReceived = true;
-            } else {
-              throw 'Failed to get designations';
-            }
-          })
-          .catch(function (error) {
-            $log.debug(error);
-            $scope.designations = [];
-            $scope.designationsRecieved = false;
-          });
+        $scope.designations = domainData.designations;
+        $log.debug('$scope.designations = ', $scope.designations);
 
-        EmployeeService.fetchEmployees()
-          .then(function (data) {
-            if (angular.isArray(data) && data.length > 0) {
-              $scope.employees = data;
-              $scope.employeeListReceived = true;
-            } else {
-              throw 'Failed to get employees.';
-            }
-          })
-          .catch(function (error) {
-            $log.debug(error);
-          });
+        $scope.employees = domainData.employees;
+        $log.debug('$scope.employees = ', $scope.employees);
+
+        if(angular.isArray($scope.employees) && $scope.employees.length > 0) {
+          $scope.employeesReceived = true;
+        }
       };
 
       $scope.deleteEmployee = function (id) {

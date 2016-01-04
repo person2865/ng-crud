@@ -16,9 +16,10 @@ angular.module('employeeApp')
       $scope.resetForm = function () {
         $scope.employee = EmployeeService.getEmployeeById(employeeId, employeeList);
         if(!$scope.employee.designation) {
-          $scope.employee.designation = $scope.designations ? $scope.designations[0] : 'Consultant';
+          $scope.employee.designation = $scope.designations[0];
         }
         $scope.employeeFormModel = angular.copy($scope.employee);
+        $scope.employeeForm.$setPristine();
       };
 
       $scope.submitEmployee = function () {
