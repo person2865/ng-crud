@@ -19,7 +19,9 @@ angular.module('employeeApp')
           $scope.employee.designation = $scope.designations[0];
         }
         $scope.employeeFormModel = angular.copy($scope.employee);
-        $scope.employeeForm.$setPristine();
+        if($scope.employeeForm) {
+          $scope.employeeForm.$setPristine();
+        }
       };
 
       $scope.submitEmployee = function () {
