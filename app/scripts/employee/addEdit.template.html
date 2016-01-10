@@ -4,41 +4,45 @@
     <h2 ng-hide="employeeFormModel.id < 0">{{messages.headings.editEmployee}}</h2>
 
     <div class="notification-panel">
-        <div class="bg-danger">
-            <p class="text-danger" ng-if="employeeForm.firstName.$dirty && employeeForm.firstName.$invalid">
+        <ul class="bg-danger list-unstyled">
+            <li class="text-danger" ng-if="employeeForm.firstName.$dirty && employeeForm.firstName.$invalid">
                 Please enter a valid First Name.
-            </p>
-            <p class="text-danger" ng-if="employeeForm.lastName.$dirty && employeeForm.lastName.$invalid">
+            </li>
+            <li class="text-danger" ng-if="employeeForm.lastName.$dirty && employeeForm.lastName.$invalid">
                 Please enter a valid Last Name.
-            </p>
-            <p class="text-danger" ng-if="employeeForm.age.$dirty && employeeForm.age.$invalid">
+            </li>
+            <li class="text-danger" ng-if="employeeForm.age.$dirty && employeeForm.age.$invalid">
                 Please enter a valid Age.
-            </p>
-            <p class="text-danger" ng-if="employeeForm.designation.$dirty && employeeForm.designation.$invalid">
-                Please enter a Designation.
-            </p>
-            <p class="text-danger" >
+            </li>
+            <li class="text-danger"
+                ng-if="(employeeForm.designation.$dirty && employeeForm.designation.$invalid) ||
+                        (employeeForm.salary.$dirty && employeeForm.salary.$invalid)">
+                Please enter a valid Designation.
+            </li>
+            <li class="text-danger"
+                ng-if="(employeeForm.salary.$dirty && employeeForm.salary.$invalid) ||
+                        (employeeForm.designation.$dirty && employeeForm.designation.$invalid)">
                 Please enter a valid Salary for {{ employeeFormModel.designation }}.
                 <span ng-if="employeeFormModel.designation === 'Consultant'">
-                    {{ messages.errors.salaryConsultant }}
+                    <br>{{ messages.errors.salaryConsultant }}
                 </span>
                 <span ng-if="employeeFormModel.designation === 'Snr. Consultant'">
-                    {{ messages.errors.salarySnrConsultant }}
+                    <br>{{ messages.errors.salarySnrConsultant }}
                 </span>
                 <span ng-if="employeeFormModel.designation === 'Lead'">
-                    {{ messages.errors.salaryLead }}
+                    <br>{{ messages.errors.salaryLead }}
                 </span>
                 <span ng-if="employeeFormModel.designation === 'Asst. Manager'">
-                    {{ messages.errors.salaryAsstManager }}
+                    <br>{{ messages.errors.salaryAsstManager }}
                 </span>
                 <span ng-if="employeeFormModel.designation === 'Manager'">
-                    {{ messages.errors.salaryManager }}
+                    <br>{{ messages.errors.salaryManager }}
                 </span>
                 <span ng-if="employeeFormModel.designation === 'Snr. Manager'">
-                    {{ messages.errors.salarySnrManager }}
+                    <br>{{ messages.errors.salarySnrManager }}
                 </span>
-            </p>
-        </div>
+            </li>
+        </ul>
     </div>
 
     <form name="employeeForm" ng-submit="" novalidate>
@@ -97,19 +101,26 @@
         </div>
         <div class="row">
             <div class="form-group col-md-4"
-                 ng-class="{'has-error': employeeForm.designation.$dirty && employeeForm.designation.$invalid}">
+                 ng-class="{
+                 'has-error': (employeeForm.designation.$dirty && employeeForm.designation.$invalid) ||
+                              (employeeForm.salary.$dirty && employeeForm.salary.$invalid)
+                 }">
                 <label for="designation">Designation *</label>
                 <select ng-model="employeeFormModel.designation"
                         ng-options="item as item for item in designations"
                         class="form-control"
                         id="designation"
                         name="designation"
+                        ng-change="validateSalary()"
                         required>
                 </select>
 
             </div>
             <div class="form-group col-md-4"
-                 ng-class="{'has-error': employeeForm.salary.$dirty && employeeForm.salary.$invalid}">
+                 ng-class="{
+                 'has-error': (employeeForm.designation.$dirty && employeeForm.designation.$invalid) ||
+                              (employeeForm.salary.$dirty && employeeForm.salary.$invalid)
+                 }">
                 <label for="salary">Salary *</label>
                 <input ng-model="employeeFormModel.salary"
                        type="number"
@@ -119,6 +130,7 @@
                        placeholder="Salary"
                        ng-min="30000"
                        ng-max="80000"
+                       ng-change="validateSalary()"
                        ng-pattern="/^[0-9]+$/"
                        required>
 
@@ -150,6 +162,4 @@
         </div>
 
     </form>
-    <pre>{{ employeeFormModel | json }}</pre>
-    <pre>{{ employee | json }}</pre>
 </div>

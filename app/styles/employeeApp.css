@@ -12,6 +12,6 @@ body {
     padding: 10px;
 }
 
-.notification-panel p {
-    padding: 5px;
+.notification-panel li {
+    padding: 10px;
 }

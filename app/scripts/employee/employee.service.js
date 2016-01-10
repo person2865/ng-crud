@@ -66,8 +66,8 @@ angular.module('employeeApp')
                 middle: '',
                 last: ''
               },
-              age: '',
-              salary: '',
+              age: null,
+              salary: null,
               designation: ''
             });
           }

@@ -7,8 +7,7 @@ angular.module('employeeApp')
     '$window',
 
     function ($scope, $log, $stateParams, EmployeeService, $window) {
-      var employeeId = $stateParams.employeeId,
-        employeeList = $scope.employees;
+      var employeeList = $scope.employees;
 
       $scope.employeeFormModel = {};
       $scope.employee = {};
@@ -48,17 +47,39 @@ angular.module('employeeApp')
         $window.location = '#';
       };
 
+      $scope.validateSalary = function () {
+        var salary = $scope.employeeFormModel.salary,
+            designation = $scope.employeeFormModel.designation,
+            salaryValid = false;
+
+        switch(designation) {
+          case 'Consultant':
+            salaryValid = salary <= 35000 && salary >= 30000;
+            $log.debug('Salary invalid:: Salary = ' + salary);
+            break;
+          case 'Snr. Consultant':
+            salaryValid = salary <= 40000 && salary >= 36000;
+            break;
+          case 'Lead':
+            salaryValid = salary <= 45000 && salary >= 41000;
+            break;
+          case 'Asst. Manager':
+            salaryValid = salary <= 50000 && salary >= 46000;
+            break;
+          case 'Manager':
+            salaryValid = salary <= 55000 && salary >= 51000;
+            break;
+          case 'Snr. Manager':
+            salaryValid = salary <= 80000 && salary >= 56000;
+            break;
+          default:
+            salaryValid = salary <= 80000 && salary >= 30000;
+            break;
+        }
+        $scope.employeeForm.salary.$setValidity('salary', salaryValid);
+      };
+
       $scope.resetForm();
-      //$scope.$watch('employees', $scope.resetForm());
-
-
-
-
-
-
-
-
-
     }
 
   ]);

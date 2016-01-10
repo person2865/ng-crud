@@ -67,45 +67,4 @@ employeeApp.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'EmployeeAddEditController'
     });
 
-  /*function getDomainData($log, EmployeeService) {
-   var domainData = {};
-   domainData.messages = EmployeeService
-   .fetchMessages()
-   .then(function (data) {
-   if (angular.isDefined(data)) {
-   return data;
-   } else {
-   throw 'Cannot get messages.';
-   }
-   })
-   .catch(function (error) {
-   $log.debug(error);
-   });
-   domainData.designations = EmployeeService
-   .fetchDesignations()
-   .then(function (data) {
-   if (angular.isArray(data) && data.length > 0) {
-   return data;
-   } else {
-   throw 'Cannot get designations.';
-   }
-   })
-   .catch(function (error) {
-   $log.debug(error);
-   });
-   domainData.employees = EmployeeService
-   .fetchEmployees()
-   .then(function (data) {
-   if (angular.isArray(data) && data.length > 0) {
-   return data;
-   } else {
-   throw 'Cannot get employees list.';
-   }
-   })
-   .catch(function (error) {
-   $log.debug(error);
-   });
-
-   return domainData;
-   }*/
 });
