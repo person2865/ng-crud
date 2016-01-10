@@ -14,14 +14,26 @@ angular.module('employeeApp')
       $scope.employee = {};
 
       $scope.resetForm = function () {
-        $scope.employee = EmployeeService.getEmployeeById(employeeId, employeeList);
+        //load employee based on stateParams
+        $scope.employee = EmployeeService.getEmployeeById($stateParams.employeeId, employeeList);
+
+        //if employee does not have a designation, load the default designation
         if(!$scope.employee.designation) {
           $scope.employee.designation = $scope.designations[0];
         }
+
+        $log.debug('employee = ', $scope.employee);
+
+        //make a copy fo the employee to use in the form
         $scope.employeeFormModel = angular.copy($scope.employee);
+        $log.debug('employeeFormModel = ', $scope.employeeFormModel);
+
+        //reset form state
         if($scope.employeeForm) {
+          $log.debug('setting form as pristine');
           $scope.employeeForm.$setPristine();
         }
+
       };
 
       $scope.submitEmployee = function () {
@@ -36,7 +48,17 @@ angular.module('employeeApp')
         $window.location = '#';
       };
 
-      $scope.$watch('employees', $scope.resetForm());
+      $scope.resetForm();
+      //$scope.$watch('employees', $scope.resetForm());
+
+
+
+
+
+
+
+
+
     }
 
   ]);

@@ -4,13 +4,47 @@
     <h2 ng-hide="employeeFormModel.id < 0">{{messages.headings.editEmployee}}</h2>
 
     <div class="notification-panel">
-        <p class="bg-success">Successfully saved</p>
-        <p class="bg-danger">Not able to save</p>
+        <div class="bg-danger">
+            <p class="text-danger" ng-if="employeeForm.firstName.$dirty && employeeForm.firstName.$invalid">
+                Please enter a valid First Name.
+            </p>
+            <p class="text-danger" ng-if="employeeForm.lastName.$dirty && employeeForm.lastName.$invalid">
+                Please enter a valid Last Name.
+            </p>
+            <p class="text-danger" ng-if="employeeForm.age.$dirty && employeeForm.age.$invalid">
+                Please enter a valid Age.
+            </p>
+            <p class="text-danger" ng-if="employeeForm.designation.$dirty && employeeForm.designation.$invalid">
+                Please enter a Designation.
+            </p>
+            <p class="text-danger" >
+                Please enter a valid Salary for {{ employeeFormModel.designation }}.
+                <span ng-if="employeeFormModel.designation === 'Consultant'">
+                    {{ messages.errors.salaryConsultant }}
+                </span>
+                <span ng-if="employeeFormModel.designation === 'Snr. Consultant'">
+                    {{ messages.errors.salarySnrConsultant }}
+                </span>
+                <span ng-if="employeeFormModel.designation === 'Lead'">
+                    {{ messages.errors.salaryLead }}
+                </span>
+                <span ng-if="employeeFormModel.designation === 'Asst. Manager'">
+                    {{ messages.errors.salaryAsstManager }}
+                </span>
+                <span ng-if="employeeFormModel.designation === 'Manager'">
+                    {{ messages.errors.salaryManager }}
+                </span>
+                <span ng-if="employeeFormModel.designation === 'Snr. Manager'">
+                    {{ messages.errors.salarySnrManager }}
+                </span>
+            </p>
+        </div>
     </div>
 
-    <form name="employeeForm" ng-submit="submitEmployee()" novalidate>
+    <form name="employeeForm" ng-submit="" novalidate>
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error': employeeForm.firstName.$dirty && employeeForm.firstName.$invalid}">
                 <label for="firstName">First Name *</label>
                 <input ng-model="employeeFormModel.name.first"
                        type="text"
@@ -20,9 +54,7 @@
                        placeholder="First name"
                        ng-pattern="/^[a-zA-Z ]+$/"
                        required>
-                <p class="text-danger" ng-if="employeeForm.firstName.$dirty && employeeForm.firstName.$invalid">
-                    Please enter a valid First Name.
-                </p>
+
             </div>
             <div class="form-group col-md-4">
                     <label for="middleName">Middle Name</label>
@@ -33,7 +65,8 @@
                        name="middleName"
                        placeholder="Middle name (optional)">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error': employeeForm.lastName.$dirty && employeeForm.lastName.$invalid}">
                 <label for="lastName">Last Name *</label>
                 <input ng-model="employeeFormModel.name.last"
                        type="text"
@@ -43,13 +76,12 @@
                        placeholder="Last name"
                        ng-pattern="/^[a-zA-Z ]+$/"
                        required>
-                <p class="text-danger" ng-if="employeeForm.lastName.$dirty && employeeForm.lastName.$invalid">
-                    Please enter a valid Last Name.
-                </p>
+
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error': employeeForm.age.$dirty && employeeForm.age.$invalid}">
                 <label for="age">Age *</label>
                 <input ng-model="employeeFormModel.age"
                        type="number"
@@ -60,13 +92,12 @@
                        ng-min="0"
                        ng-pattern="/^[0-9]+$/"
                        required>
-                <p class="text-danger" ng-if="employeeForm.age.$dirty && employeeForm.age.$invalid">
-                    Please enter a valid Age.
-                </p>
+
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error': employeeForm.designation.$dirty && employeeForm.designation.$invalid}">
                 <label for="designation">Designation *</label>
                 <select ng-model="employeeFormModel.designation"
                         ng-options="item as item for item in designations"
@@ -75,11 +106,10 @@
                         name="designation"
                         required>
                 </select>
-                <p class="text-danger" ng-if="employeeForm.designation.$dirty && employeeForm.designation.$invalid">
-                    Please enter a Designation.
-                </p>
+
             </div>
-            <div class="form-group col-md-4 ng-class="{'has-error': employeeForm.salary.$invalid}">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error': employeeForm.salary.$dirty && employeeForm.salary.$invalid}">
                 <label for="salary">Salary *</label>
                 <input ng-model="employeeFormModel.salary"
                        type="number"
@@ -91,44 +121,22 @@
                        ng-max="80000"
                        ng-pattern="/^[0-9]+$/"
                        required>
-                <p class="text-danger" >
-                    Please enter a valid Salary for {{ employeeFormModel.designation }}.
-                    <span ng-if="employeeFormModel.designation === 'Consultant'">
-                        {{ messages.errors.salaryConsultant }}
-                    </span>
-                    <span ng-if="employeeFormModel.designation === 'Snr. Consultant'">
-                        {{ messages.errors.salarySnrConsultant }}
-                    </span>
-                    <span ng-if="employeeFormModel.designation === 'Lead'">
-                        {{ messages.errors.salaryLead }}
-                    </span>
-                    <span ng-if="employeeFormModel.designation === 'Asst. Manager'">
-                        {{ messages.errors.salaryAsstManager }}
-                    </span>
-                    <span ng-if="employeeFormModel.designation === 'Manager'">
-                        {{ messages.errors.salaryManager }}
-                    </span>
-                    <span ng-if="employeeFormModel.designation === 'Snr. Manager'">
-                        {{ messages.errors.salarySnrManager }}
-                    </span>
-                </p>
+
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <button type="submit"
-                        class="btn btn-primary"
+                <button class="btn btn-primary"
+                        ng-click="submitEmployee()"
                         ng-disabled="employeeForm.$pristine || employeeForm.$invalid">
                     Submit
                 </button>
                 &nbsp;
 
-                <a class="btn btn-default"
-                   role="button"
-                   alt="Reset Form"
-                   ng-click="resetForm()">
+                <button class="btn btn-default"
+                        ng-click="resetForm()">
                     Reset
-                </a>
+                </button>
 
             </div>
             <div class="col-md-4 col-md-offset-4 text-right">
@@ -142,5 +150,6 @@
         </div>
 
     </form>
-    {{ employeeForm | json }}
+    <pre>{{ employeeFormModel | json }}</pre>
+    <pre>{{ employee | json }}</pre>
 </div>

@@ -52,12 +52,25 @@ angular.module('employeeApp')
 
           item.id = parseInt(id);
 
-          itemList.forEach(function (el) {
-            if (el.id === parseInt(id)) {
-              item = el;
-              return false;
-            }
-          });
+          if(id > -1) {
+            itemList.forEach(function (el) {
+              if (el.id === parseInt(id)) {
+                item = el;
+                return false;
+              }
+            });
+          } else {
+            item = angular.extend(item, {
+              name: {
+                first: '',
+                middle: '',
+                last: ''
+              },
+              age: '',
+              salary: '',
+              designation: ''
+            });
+          }
 
           return item;
         }
